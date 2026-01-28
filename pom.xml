@@ -11,16 +11,26 @@
     <packaging>jar</packaging>
 
     <name>string-utils</name>
-    <description>Simple Java app for CI/CD with Jenkins, SonarQube, Nexus, Docker, ECR, ArgoCD</description>
+    <description>
+        Simple Java app for CI/CD with Jenkins, SonarQube, Nexus, Docker, ECR, ArgoCD
+    </description>
 
     <properties>
+        <!-- Version injected by Jenkins -->
         <revision>1.0.0</revision>
+
+        <!-- Java version -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Exclude main entry class from coverage (best practice) -->
+        <sonar.coverage.exclusions>**/App.java</sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
+        <!-- JUnit 4 for unit testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -32,12 +42,14 @@
     <build>
         <plugins>
 
+            <!-- Java compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
             </plugin>
 
+            <!-- Create runnable JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -51,18 +63,21 @@
                 </configuration>
             </plugin>
 
+            <!-- Run unit tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
             </plugin>
 
+            <!-- SonarQube Maven plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>4.0.0.4121</version>
             </plugin>
 
+            <!-- JaCoCo for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
